@@ -27,5 +27,7 @@ services:
       - "~/.bash_history:/.bash_history"
       - "./services/app/www:/usr/src/app/www"
       - "/tmp:/tmp:delegated"
+    app:
+    env_file: ".env"
     depends_on:
       - db

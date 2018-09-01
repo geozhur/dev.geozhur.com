@@ -1,0 +1,4 @@
+geozhur_basics_port: 9000
+
+geozhur_install_compose: false
+geozhur_package_state: latest
