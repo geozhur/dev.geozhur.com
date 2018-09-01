@@ -14,19 +14,19 @@ services:
       - "8080:8080"
     volumes:
       - "./services/nginx/basics.conf.template:/basics.conf.template"
-      - "./services/nginx/maintenance.html:/etc/nginx/html/maintenance.html"
+      - "./services/nginx/maintenance.html:/usr/src/app/maintenance.html"
     links:
-      - php
+      - app
     environment:
-      NGINX_SERVER_ADDRESS: 'php'
+      NGINX_SERVER_ADDRESS: 'app'
 
-  php:
+  app:
     build:
-      context: services/php
+      context: services/app
       dockerfile: Dockerfile.development
     volumes:
       - "~/.bash_history:/.bash_history"
-      - "./services/php:/usr/src/appexit"
+      - "./services/app:/usr/src/appexit"
       - "/tmp:/tmp:delegated"
     depends_on:
       - db
