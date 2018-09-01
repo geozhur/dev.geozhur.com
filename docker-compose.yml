@@ -2,9 +2,11 @@ version: '3.5'
 
 services:
   db:
-    image: postgres
+    image: mariadb:10.3
     environment:
-      - pgdata:/var/lib/postgresql/data
+      - MYSQL_ROOT_PASSWORD=secret123
+    volumes:
+      - ./mysql:/var/lib/mysql
 
   nginx:
     build:

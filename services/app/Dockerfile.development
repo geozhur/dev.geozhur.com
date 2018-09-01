@@ -8,8 +8,7 @@ RUN	docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 	&& docker-php-ext-install \
     opcache \
     pdo \
-    pdo_pgsql \
-    pgsql \
+    mysqli \
     dom \
     mbstring \
     session \
