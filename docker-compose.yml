@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - pgdata:/var/lib/postgresql/data
+
+  nginx:
+    build:
+      context: services/nginx
+      dockerfile: Dockerfile.development
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./services/nginx/basics.conf.template:/basics.conf.template"
+      - "./services/nginx/maintenance.html:/etc/nginx/html/maintenance.html"
+    links:
+      - php
+    environment:
+      NGINX_SERVER_ADDRESS: 'php'
+
+  php:
+    build:
+      context: services/php
+      dockerfile: Dockerfile.development
+    volumes:
+      - "~/.bash_history:/.bash_history"
+      - "./services/php:/usr/src/appexit"
+      - "/tmp:/tmp:delegated"
+    depends_on:
+      - db
