@@ -1,7 +1,7 @@
 FROM nginx
 
 COPY basics.conf.template /basics.conf.template
-COPY maintenance.html /etc/nginx/html/maintenance.html
+COPY maintenance.html /usr/src/app/www/maintenance.html
 
 RUN \
   apt-get update \

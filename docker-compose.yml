@@ -14,8 +14,8 @@ services:
       - "8080:8080"
     volumes:
       - "./services/nginx/basics.conf.template:/basics.conf.template"
-      - "./services/nginx/maintenance.html:/usr/src/app/maintenance.html"
-      - "./services/app:/usr/src/app"
+      - "./services/nginx/maintenance.html:/usr/src/app/www/maintenance.html"
+      - "./services/app/www:/usr/src/app/www"
     links:
       - app
     environment:
@@ -27,7 +27,7 @@ services:
       dockerfile: Dockerfile.development
     volumes:
       - "~/.bash_history:/.bash_history"
-      - "./services/app:/usr/src/app"
+      - "./services/app/www:/usr/src/app/www"
       - "/tmp:/tmp:delegated"
     depends_on:
       - db
