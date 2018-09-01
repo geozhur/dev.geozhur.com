@@ -7,4 +7,4 @@ app-build:
 	docker-compose build
 
 app-bash:
-	docker-compose run php bash
+	docker-compose run app bash

@@ -15,6 +15,7 @@ services:
     volumes:
       - "./services/nginx/basics.conf.template:/basics.conf.template"
       - "./services/nginx/maintenance.html:/usr/src/app/maintenance.html"
+      - "./services/app:/usr/src/app"
     links:
       - app
     environment:

@@ -7,5 +7,3 @@ RUN	docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     pdo \
     pdo_pgsql \
     pgsql 
-ENV PROJECT_ROOT /usr/src/app
-WORKDIR $PROJECT_ROOT
