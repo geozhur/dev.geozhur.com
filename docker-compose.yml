@@ -4,7 +4,7 @@ services:
   nginx:
     build:
       context: services/nginx
-      dockerfile: Dockerfile.development
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
@@ -15,7 +15,7 @@ services:
   app:
     build:
       context: services/app
-      dockerfile: Dockerfile.development
+      dockerfile: Dockerfile
     volumes:
       - "~/.bash_history:/.bash_history"
       - "./services/app:/usr/src/app"

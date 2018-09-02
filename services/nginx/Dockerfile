@@ -11,5 +11,3 @@ RUN \
 
 ENTRYPOINT envsubst '$NGINX_SERVER_ADDRESS' < /basics.conf.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'
 
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-	  && ln -sf /dev/stderr /var/log/nginx/error.log

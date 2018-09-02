@@ -1,4 +1,7 @@
 FROM php:7.2-fpm
+
+WORKDIR /usr/src/app/
+
 RUN apt-get update && apt-get install -y \
 	libpq-dev \
     libxml2-dev \
@@ -16,12 +19,8 @@ RUN	docker-php-ext-install \
 RUN curl -sS https://getcomposer.org/installer |\
     php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY ./composer.json ./composer.lock /usr/src/app/
+COPY ./composer.json ./composer.lock ./
 
-RUN cd /usr/src/app \
-    && composer install \
+RUN composer install \
         --no-interaction \
     && composer clear-cache
-
-RUN ln -sf /dev/stdout /var/log/fpm-access.log && \
-    ln -sf /dev/stderr /var/log/fpm-php.www.log
