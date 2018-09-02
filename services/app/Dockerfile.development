@@ -4,13 +4,24 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zlib1g-dev \
     && apt-get clean -y
-RUN	docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-	&& docker-php-ext-install \
+RUN	docker-php-ext-install \
     opcache \
     pdo \
-    mysqli \
     dom \
     mbstring \
     session \
     tokenizer \
-    zip \
+    zip
+
+RUN curl -sS https://getcomposer.org/installer |\
+    php -- --install-dir=/usr/local/bin --filename=composer
+
+COPY ./composer.json ./composer.lock /usr/src/app/
+
+RUN cd /usr/src/app \
+    && composer install \
+        --no-interaction \
+    && composer clear-cache
+
+RUN ln -sf /dev/stdout /var/log/fpm-access.log && \
+    ln -sf /dev/stderr /var/log/fpm-php.www.log

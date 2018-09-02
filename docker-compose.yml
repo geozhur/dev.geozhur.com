@@ -1,13 +1,6 @@
 version: '3.5'
 
 services:
-  db:
-    image: mariadb:10.3
-    environment:
-      - MYSQL_ROOT_PASSWORD=secret123
-    volumes:
-      - "./services/mysql:/var/lib/mysql"
-
   nginx:
     build:
       context: services/nginx
@@ -26,7 +19,6 @@ services:
     volumes:
       - "~/.bash_history:/.bash_history"
       - "./services/app:/usr/src/app"
+      - "/usr/src/app/vendor"
       - "/tmp:/tmp:delegated"
     env_file: ".env"
-    depends_on:
-      - db
