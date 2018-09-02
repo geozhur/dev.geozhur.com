@@ -6,7 +6,10 @@ RUN apt-get update && apt-get install -y \
 	libpq-dev \
     libxml2-dev \
     zlib1g-dev \
+    git \ 
+    zip \
     && apt-get clean -y
+    
 RUN	docker-php-ext-install \
     opcache \
     pdo \
@@ -16,10 +19,8 @@ RUN	docker-php-ext-install \
     tokenizer \
     zip
 
-FROM composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY ./composer.json ./composer.lock ./
 
-RUN composer install \
-        --no-interaction \
-    && composer clear-cache
+RUN composer install --no-interaction
